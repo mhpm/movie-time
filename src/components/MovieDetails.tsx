@@ -19,7 +19,7 @@ const MovieDetails = ({
     <>
       <Navbar />
       <div className='container'>
-        <div className='flex flex-col space-y-2 py-16 md:space-y-4 h-[100vh] justify-center lg:pb-12'>
+        <div className='flex flex-col space-y-2 py-16 md:space-y-4 h-[100vh] justify-center lg:pb-12 px-20'>
           <div className='absolute top-0 left-0 -z-10 h-screen w-screen'>
             <Image
               fill
