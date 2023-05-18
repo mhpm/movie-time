@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './Navbar';
 import Image from 'next/image';
 import { baseUrl } from '@/utils/constant';
@@ -9,12 +9,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
-const MovieDetails = ({
-  movie,
-  showPlayer,
-  setShowPlayer,
-  trailerURL,
-}: any) => {
+const MovieDetails = ({ movie, trailerURL }: any) => {
+  const [showPlayer, setShowPlayer] = useState(false);
   return (
     <>
       <Navbar />

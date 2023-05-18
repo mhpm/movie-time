@@ -6,7 +6,6 @@ import MovieDetails from './MovieDetails';
 const Hero = ({ moviePosters }: { moviePosters: any }) => {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState('');
-  const [showPlayer, setShowPlayer] = useState(false);
 
   useEffect(() => {
     if (moviePosters) {
@@ -33,12 +32,7 @@ const Hero = ({ moviePosters }: { moviePosters: any }) => {
 
   return (
     <div>
-      <MovieDetails
-        movie={movie}
-        showPlayer={showPlayer}
-        setShowPlayer={setShowPlayer}
-        trailerURL={trailer}
-      />
+      <MovieDetails movie={movie} trailerURL={trailer} />
     </div>
   );
 };

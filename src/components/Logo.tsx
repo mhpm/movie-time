@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Logo = ({ style }: { style: any }) => {
   return (
     <svg className={style} viewBox='0 0 111 30' fill='#e50914'>
