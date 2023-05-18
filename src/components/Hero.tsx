@@ -16,8 +16,6 @@ const Hero = ({ moviePosters }: { moviePosters: any }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(`data::: `, data);
-
           const trailerIndex = data.videos.results.findIndex(
             (element: any) => element.type === 'Trailer'
           );

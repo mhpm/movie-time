@@ -1,10 +1,31 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Logo from './Logo';
-
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const handleRouteChange = () => {
+    setLoading(!loading);
+    console.log('started');
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, [router]);
+
+  const handleSubmit = async () => {
+    await signIn('google', { redirect: false, callbackUrl: '/dashboard' });
+  };
+
   return (
     <div className='login_bg_gradient bg-cover h-screen grid place-items-center'>
       <Logo style='w-52 absolute top-0 left-0 m-8' />
@@ -14,9 +35,9 @@ const Login = () => {
 
         <button
           className='bg-white text-black flex gap-2 items-center p-4 text-xl w-full rounded justify-center'
-          onClick={() => signIn('google')}>
+          onClick={handleSubmit}>
           <FcGoogle className='text-3xl rounded-full' />
-          Google
+          {loading ? 'Loading' : 'Google'}
         </button>
       </div>
     </div>

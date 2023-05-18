@@ -1,7 +1,6 @@
 import Login from '@/components/Login';
 import MovieDetails from '@/components/MovieDetails';
 import { getSession, useSession } from 'next-auth/react';
-import { useState } from 'react';
 
 const MovieDetailPage = ({ movie }: any) => {
   const { data: session } = useSession();
@@ -36,5 +35,7 @@ export async function getServerSideProps(context: any) {
     },
   };
 }
+
+MovieDetailPage.auth = true;
 
 export default MovieDetailPage;
