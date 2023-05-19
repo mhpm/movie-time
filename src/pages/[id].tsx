@@ -1,13 +1,8 @@
-import Login from '@/components/Login';
 import MovieDetails from '@/components/MovieDetails';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 const MovieDetailPage = ({ movie }: any) => {
-  const { data: session } = useSession();
-
-  if (!session) return <Login />;
-
-  const trailerIndex = movie.videos.results.findIndex(
+  const trailerIndex = movie?.videos?.results.findIndex(
     (element: any) => element.type === 'Trailer'
   );
 

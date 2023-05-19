@@ -1,7 +1,8 @@
 import '@/styles/globals.css';
+import Login from '@/components/Login';
 import { EStatus } from '@/utils/constant';
 import { SessionProvider, useSession } from 'next-auth/react';
-import { Suspense } from 'react';
+import router from 'next/router';
 
 export default function App({
   Component,
@@ -14,9 +15,7 @@ export default function App({
           <Component {...pageProps} />
         </Auth>
       ) : (
-        <Suspense fallback={<div>Loading</div>}>
-          <Component {...pageProps} />
-        </Suspense>
+        <Component {...pageProps} />
       )}
     </SessionProvider>
   );
@@ -24,7 +23,12 @@ export default function App({
 
 function Auth({ children }: any) {
   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-  const { status } = useSession({ required: true });
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.replace('/');
+    },
+  });
 
   if (status === EStatus.loading) {
     return (

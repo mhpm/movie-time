@@ -6,55 +6,48 @@ import { useRouter } from 'next/router';
 import { EStatus } from '@/utils/constant';
 
 const Home = () => {
+  const router = useRouter();
   const { status } = useSession();
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
+  const handleRouteComplete = () => setLoading(false);
 
-  const handleRouteChange = () => {
-    setLoading(false);
-    console.log('routeChangeComplete');
-  };
-
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router]);
+  const handleRouteStart = () => setLoading(true);
 
   useEffect(() => {
     if (status === EStatus.authenticated) {
-      router.push('/dashboard');
+      router.replace('/dashboard');
     }
   }, [status]);
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteComplete);
+    router.events.on('routeChangeStart', handleRouteStart);
 
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteComplete);
+      router.events.off('routeChangeStart', handleRouteStart);
     };
   }, [router]);
 
   const onLogin = async () => {
     setLoading(true);
-    await signIn('google', { redirect: true, callbackUrl: '/dashboard' });
+    await signIn('google', { redirect: false, callbackUrl: '/dashboard' });
   };
 
   return (
-    <div className='login_bg_gradient bg-cover h-screen grid place-items-center'>
+    <div className='login_bg_gradient bg-cover h-screen grid place-items-center p-10'>
       <Logo style='w-52 absolute top-0 left-0 m-8' />
 
-      <div className='text-center bg-[rgba(0,0,0,0.75)] p-10 w-80 space-y-6'>
+      <div className='text-center bg-[rgba(0,0,0,0.75)] p-10 sm:w-[400px] w-full  space-y-6 flex flex-col justify-center items-center'>
         <h2 className='text-3xl font-medium'>Sign in</h2>
 
         <button
+          disabled={loading}
           className='bg-white text-black flex gap-2 items-center p-4 text-xl w-full rounded justify-center'
           onClick={onLogin}>
           <FcGoogle className='text-3xl rounded-full' />
-          {loading ? 'Loading' : 'Google'}
+          {loading ? 'Loading' : 'Sign in with Google'}
         </button>
       </div>
     </div>

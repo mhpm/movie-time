@@ -5,9 +5,11 @@ import Image from 'next/image';
 
 import { BiSearch } from 'react-icons/bi';
 import { BsBellFill } from 'react-icons/bs';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
+  const { data: session } = useSession();
+
   return (
     <nav>
       <div className='container flex justify-between'>
@@ -30,7 +32,7 @@ const Navbar = () => {
 
         <div className='flex items-center space-x-4 text-sm font-light'>
           <BiSearch className='sm hidden h-6 w-6 sm:inline' />
-          <p className='hidden lg:inline'>Kids</p>
+          <p className='hidden lg:inline'>{session?.user?.name}</p>
           <BsBellFill className='h-6 w-6' />
 
           <Image
