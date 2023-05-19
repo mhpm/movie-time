@@ -10,20 +10,28 @@ const Login = () => {
   const router = useRouter();
 
   const handleRouteChange = () => {
-    setLoading(!loading);
-    console.log('started');
+    setLoading(false);
+    console.log('routeChangeComplete');
   };
 
   useEffect(() => {
-    router.events.on('routeChangeStart', handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
 
     return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router]);
 
   const handleSubmit = async () => {
-    await signIn('google', { redirect: false, callbackUrl: '/dashboard' });
+    setLoading(true);
+    signIn('google')
+      .then(() => {
+        //router.push('/dashboard');
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log('err: ', err);
+      });
   };
 
   return (
@@ -35,7 +43,7 @@ const Login = () => {
 
         <button
           className='bg-white text-black flex gap-2 items-center p-4 text-xl w-full rounded justify-center'
-          onClick={handleSubmit}>
+          onClick={() => signIn('google')}>
           <FcGoogle className='text-3xl rounded-full' />
           {loading ? 'Loading' : 'Google'}
         </button>
