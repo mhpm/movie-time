@@ -90,8 +90,8 @@ const Modal = ({ movie, handleClose }: any) => {
 
 const Container = ({ children }: Props) => {
   return (
-    <div className='fixed z-50 w-screen h-screen top-0 left-0 flex justify-center items-center'>
-      <div className='sm:w-1/2 w-full bg-black rounded overflow-auto sm:h-[800px] h-screen relative'>
+    <div className='fixed z-50 w-screen h-screen top-0 left-0 flex justify-center items-center bg-black/50 backdrop-blur-sm'>
+      <div className='sm:w-1/2 w-[90%] bg-black rounded overflow-auto sm:h-[800px] h-[90%] relative'>
         {children}
       </div>
     </div>
