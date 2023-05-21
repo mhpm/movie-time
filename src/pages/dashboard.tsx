@@ -26,7 +26,7 @@ export default function Dashboard({
       <main className='relative bg-gradient-to-b from-gray-900/10 to-[#010511]'>
         <Hero moviePosters={moviePosters} />
 
-        <section className='pb-32'>
+        <section className='pb-32 '>
           <Row title='Trending Now' movies={trendingNow} />
           <Row title='Top Rated' movies={topRated} />
           <Row title='Action Thrillers' movies={actionMovies} />

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import styled from '@emotion/styled';
+
 import Image from 'next/image';
 import { baseUrl } from '@/utils/constant';
 import { IoIosInformationCircle } from 'react-icons/io';
@@ -9,30 +11,42 @@ import { AiOutlineClose } from 'react-icons/ai';
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
+type ImageProps = {
+  url: string;
+};
+
+const Background = styled.div<ImageProps>`
+  background-image: linear-gradient(
+      to top,
+      rgba(20 20 20 / var(--tw-bg-opacity)),
+      rgba(0, 0, 0, 0)
+    ),
+    url(${(props) => props.url});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
+
 const MovieDetails = ({ movie, trailerURL }: any) => {
   const [showPlayer, setShowPlayer] = useState(false);
   return (
     <>
       <Navbar />
       <div className='container'>
-        <div className='flex flex-col space-y-2 py-16 md:space-y-4 h-[100vh] justify-center lg:pb-12 px-20'>
-          <div className='absolute top-0 left-0 -z-10 h-screen w-screen'>
-            <Image
-              fill
-              src={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
-              className='object-cover'
-              alt='movie poster'
-            />
-          </div>
+        <div className='flex flex-col space-y-2 py-16 md:space-y-4 h-[100vh] justify-center lg:pb-12 px-16'>
+          <Background
+            url={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
+            className='absolute top-0 left-0 -z-10 h-screen w-screen bg-gradient-to-t from-cyan-500 to-blue-500 object-cover'
+          />
 
-          <h1 className='text-2xl font-bold md:text-4xl lg:text-7xl'>
+          <h1 className='text-3xl font-bold md:text-4xl lg:text-7xl'>
             {movie?.title || movie?.name || movie?.original_name}
           </h1>
-          <p className='max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>
+          <p className=' md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>
             {movie?.overview}
           </p>
 
-          <div className='flex space-x-3'>
+          <div className='flex space-x-3 pt-5'>
             <button
               className='bannerButton bg-white text-black'
               onClick={() => {
