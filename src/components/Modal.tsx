@@ -91,7 +91,7 @@ const Modal = ({ movie, handleClose }: any) => {
 const Container = ({ children }: Props) => {
   return (
     <div className='fixed z-50 w-screen h-screen top-0 left-0 flex justify-center items-center'>
-      <div className='w-1/2 bg-black rounded overflow-auto h-[800px] relative'>
+      <div className='sm:w-1/2 w-full bg-black rounded overflow-auto sm:h-[800px] h-screen relative'>
         {children}
       </div>
     </div>
@@ -103,7 +103,7 @@ const Title = ({ children }: Props) => {
 };
 
 const Body = ({ children }: Props) => {
-  return <div className='p-10'> {children}</div>;
+  return <div className='p-10 h-full'> {children}</div>;
 };
 
 export default Modal;
