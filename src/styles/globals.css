@@ -31,7 +31,7 @@
   }
 
   body {
-    @apply relative text-white bg-[#141414];
+    @apply relative text-white bg-primary;
   }
 
   nav {
@@ -47,7 +47,7 @@
         transparent 60%,
         rgba(0, 0, 0, 0.8)
       ),
-      url('/login__bg.jpg');
+      url("/login__bg.jpg");
   }
 
   .headerLink {

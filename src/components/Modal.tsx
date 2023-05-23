@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import dynamic from "next/dynamic";
 import { FaPlay, FaStop } from "react-icons/fa";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { IoIosCloseCircle, IoIosClose } from "react-icons/io";
 import GradientBackground from "@/components/GradientBackground";
 import RankBadge from "@/components/RankBadge";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
@@ -31,11 +31,7 @@ const Modal = ({ movie, handleClose }: any) => {
         `https://api.themoviedb.org/3/movie/${movie?.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&append_to_response=videos`
       )
         .then((response) => response.json())
-        .then((data) => {
-          console.log({ data });
-
-          setData(data);
-        });
+        .then((data) => setData(data));
     };
 
     getMovie();
@@ -45,9 +41,10 @@ const Modal = ({ movie, handleClose }: any) => {
     <Container>
       <button
         onClick={handleClose}
-        className="absolute top-3 right-3 text-5xl text-stone-600"
+        className="absolute top-3 right-3 text-5xl text-primary"
       >
-        <AiFillCloseCircle />
+        <IoIosClose className="text-white absolute right-0" />
+        <IoIosCloseCircle className="absolute right-0" />
       </button>
       {showPlayer ? (
         <ReactPlayer
@@ -89,6 +86,10 @@ const Modal = ({ movie, handleClose }: any) => {
           <RankBadge rank={+movie?.vote_average} />
         </div>
       </div>
+      <div className="flex justify-end px-10 text-sm">
+        <span className="text-gray-500 pr-1"> Release Date: </span>
+        {movie?.release_date}
+      </div>
 
       <Title>{movie?.title}</Title>
       <Body>{movie?.overview}</Body>
@@ -107,11 +108,11 @@ const Container = ({ children }: Props) => {
 };
 
 const Title = ({ children }: Props) => {
-  return <h1 className="text-3xl mb-2 pl-10"> {children}</h1>;
+  return <h1 className="text-3xl font-bold mb-2 pl-10"> {children}</h1>;
 };
 
 const Body = ({ children }: Props) => {
-  return <div className="p-10 h-fit"> {children}</div>;
+  return <div className="px-10 h-fit"> {children}</div>;
 };
 
 export default Modal;

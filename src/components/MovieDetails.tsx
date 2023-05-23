@@ -7,43 +7,46 @@ import { FaPlay } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 
 import dynamic from "next/dynamic";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const MovieDetails = ({ movie, trailerURL }: any) => {
   const [showPlayer, setShowPlayer] = useState(false);
+
   return (
-    <>
+    <ParallaxProvider>
       <Navbar />
       <div className="container">
-        <div className="flex flex-col space-y-2 py-16 md:space-y-4 h-[90vh] justify-center lg:pb-12 px-16">
+        <div className="flex flex-col space-y-2 py-16 md:space-y-4 h-screen justify-center lg:pb-12 px-16">
           <GradientBackground
             url={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
             className="absolute top-0 left-0 -z-10 h-screen w-screen"
           />
 
-          <h1 className="text-3xl font-bold md:text-4xl lg:text-7xl">
-            {movie?.title || movie?.name || movie?.original_name}
-          </h1>
-          <p className=" md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl">
-            {movie?.overview}
-          </p>
+          <Parallax speed={-15}>
+            <h1 className="text-3xl font-bold md:text-4xl lg:text-7xl">
+              {movie?.title || movie?.name || movie?.original_name}
+            </h1>
+            <p className=" md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl">
+              {movie?.overview}
+            </p>
+            <div className="flex space-x-3 pt-10">
+              <button
+                className="bannerButton bg-white text-black"
+                onClick={() => {
+                  setShowPlayer(true);
+                }}
+              >
+                <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
+                Play
+              </button>
 
-          <div className="flex space-x-3 pt-5">
-            <button
-              className="bannerButton bg-white text-black"
-              onClick={() => {
-                setShowPlayer(true);
-              }}
-            >
-              <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
-              Play
-            </button>
-
-            <button className="bannerButton bg-[gray]/70">
-              <IoIosInformationCircle className="h-5 w-5 md:h-8 md:w-8" />
-              More Info
-            </button>
-          </div>
+              <button className="bannerButton bg-[gray]/70">
+                <IoIosInformationCircle className="h-5 w-5 md:h-8 md:w-8" />
+                More Info
+              </button>
+            </div>
+          </Parallax>
         </div>
 
         <div
@@ -72,7 +75,7 @@ const MovieDetails = ({ movie, trailerURL }: any) => {
           </div>
         </div>
       </div>
-    </>
+    </ParallaxProvider>
   );
 };
 
