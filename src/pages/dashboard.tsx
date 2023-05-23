@@ -23,7 +23,7 @@ export default function Dashboard({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="relative bg-gradient-to-b from-gray-900/10 to-[#010511]">
+      <main className="relative">
         <Hero moviePosters={moviePosters} />
 
         <section className="pb-32 ">

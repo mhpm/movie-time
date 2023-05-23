@@ -23,7 +23,7 @@ const MovieDetails = ({ movie, trailerURL }: any) => {
             className="absolute top-0 left-0 -z-10 h-screen w-screen"
           />
 
-          <Parallax speed={-15}>
+          <Parallax speed={-10}>
             <h1 className="text-3xl font-bold md:text-4xl lg:text-7xl">
               {movie?.title || movie?.name || movie?.original_name}
             </h1>

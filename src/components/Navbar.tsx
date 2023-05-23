@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const handleNavigation = () => {
     const position = window.scrollY;
-    if (position > 200) {
+    if (position > 500) {
       setShowColor(true);
     } else {
       setShowColor(false);
