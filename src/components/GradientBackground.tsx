@@ -11,7 +11,6 @@ const Background = styled.div<ImageProps>`
       rgba(0, 0, 0, 0)
     ),
     url(${(props) => props.url});
-  background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
 `;

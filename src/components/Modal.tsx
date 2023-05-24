@@ -59,7 +59,7 @@ const Modal = ({ movie, handleClose }: any) => {
           url={`https://image.tmdb.org/t/p/w500${
             data?.poster_path || movie?.poster_path
           }`}
-          className="rounded-sm w-full h-[350px]"
+          className="rounded-sm w-full h-[60vh] bg-center"
         />
       )}
 
