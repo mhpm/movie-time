@@ -25,6 +25,10 @@ const Modal = ({ movie, handleClose }: any) => {
     setShowPlayer(true);
   };
 
+  const togglePlayer = () => {
+    setShowPlayer(!showPlayer);
+  };
+
   useEffect(() => {
     const getMovie = async () => {
       const request = await fetch(
@@ -64,23 +68,11 @@ const Modal = ({ movie, handleClose }: any) => {
       )}
 
       <div className="flex space-x-3 p-10 justify-between">
-        {!showPlayer ? (
-          <button
-            className="bannerButton bg-white text-black"
-            onClick={getTrailer}
-          >
-            <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7" />
-            Play
-          </button>
-        ) : (
-          <button
-            className="bannerButton bg-white text-black"
-            onClick={() => setShowPlayer(false)}
-          >
-            <FaStop className="h-4 w-4 text-black md:h-7 md:w-7" />
-            Stop
-          </button>
-        )}
+        <ButtonPlayer
+          showPlayer={showPlayer}
+          getTrailer={getTrailer}
+          togglePlayer={togglePlayer}
+        />
         <div>
           <span className="text-2xl font-bold mr-3">Rank:</span>
           <RankBadge rank={+movie?.vote_average} />
@@ -110,6 +102,35 @@ const Container = ({ children }: Props) => {
 const Title = ({ children }: Props) => {
   return <h1 className="text-3xl font-bold mb-2 pl-10"> {children}</h1>;
 };
+
+const ButtonPlayer = ({
+  showPlayer,
+  getTrailer,
+  togglePlayer,
+}: {
+  showPlayer: boolean;
+  getTrailer: () => void;
+  togglePlayer: () => void;
+}) => (
+  <button
+    className="bannerButton bg-white text-black"
+    onClick={!showPlayer ? getTrailer : togglePlayer}
+  >
+    <span className="flex">
+      {!showPlayer ? (
+        <>
+          <FaPlay className="h-4 w-4 text-black md:h-7 md:w-7 mr-2" />
+          Play
+        </>
+      ) : (
+        <>
+          <FaStop className="h-4 w-4 text-black md:h-7 md:w-7 mr-2" />
+          Stop
+        </>
+      )}
+    </span>
+  </button>
+);
 
 const Body = ({ children }: Props) => {
   return <div className="px-10 h-fit"> {children}</div>;
