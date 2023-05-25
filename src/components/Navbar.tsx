@@ -1,36 +1,20 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Image from "next/image";
 
 import { BiSearch } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
 import { signOut, useSession } from "next-auth/react";
+import { useScroll } from "@/hooks/useScroll";
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const [showColor, setShowColor] = useState(false);
-
-  const handleNavigation = () => {
-    const position = window.scrollY;
-    if (position > 500) {
-      setShowColor(true);
-    } else {
-      setShowColor(false);
-    }
-  };
-
-  useEffect(() => {
-    handleNavigation();
-    window.addEventListener("scroll", () => handleNavigation());
-
-    return () => window.removeEventListener("scroll", () => handleNavigation());
-  }, []);
+  const { positionY } = useScroll();
 
   return (
     <nav
       className={[
-        showColor ? "bg-primary" : "",
+        positionY > 500 ? "bg-primary" : "",
         "transition duration-300 ease-out",
       ].join(" ")}
     >

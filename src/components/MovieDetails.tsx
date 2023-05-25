@@ -20,7 +20,7 @@ const MovieDetails = ({ movie, trailerURL }: any) => {
         <div className="flex flex-col space-y-2 py-16 md:space-y-4 h-screen justify-center lg:pb-12 px-16">
           <GradientBackground
             url={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
-            className="absolute top-0 left-0 -z-10 h-screen w-screen"
+            className="absolute top-0 left-0 -z-10 h-screen w-screen bg-center"
           />
 
           <Parallax speed={-10}>
@@ -48,7 +48,6 @@ const MovieDetails = ({ movie, trailerURL }: any) => {
             </div>
           </Parallax>
         </div>
-
         <div
           className={`absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-1000 ${
             showPlayer ? "opacity-100 z-50" : "opacity-0 -z-10"
