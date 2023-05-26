@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import MovieDetails from './MovieDetails';
+import React, { useEffect, useState } from "react";
+import MovieDetails from "../MovieDetails";
 
 const Hero = ({ moviePosters }: { moviePosters: any }) => {
   const [movie, setMovie] = useState(null);
-  const [trailer, setTrailer] = useState('');
+  const [trailer, setTrailer] = useState("");
 
   useEffect(() => {
     if (moviePosters) {
@@ -17,7 +17,7 @@ const Hero = ({ moviePosters }: { moviePosters: any }) => {
         .then((res) => res.json())
         .then((data) => {
           const trailerIndex = data.videos.results.findIndex(
-            (element: any) => element.type === 'Trailer'
+            (element: any) => element.type === "Trailer"
           );
 
           const trailerURL = `https://www.youtube.com/watch?v=${data.videos?.results[trailerIndex]?.key}`;

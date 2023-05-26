@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { getSession } from "next-auth/react";
 import requests from "@/utils/requests";
-import Hero from "@/components/Hero";
-import Row from "@/components/Row";
+import Hero from "@/components/layout/Hero";
+import Row from "@/components/layout/Row";
 
 export default function Dashboard({
   moviePosters = [],

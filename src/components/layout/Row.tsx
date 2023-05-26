@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import Thumbnail from "./Thumbnail";
-import Modal from "./Modal";
+import Modal from "@/components/layout/Modal";
+import Thumbnail from "@/components/Thumbnail";
 
 const Row = ({ title, movies }: any) => {
   const rowRef: any = useRef(null);

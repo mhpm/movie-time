@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Logo from "../components/Logo";
+import Logo from "../components/layout/Logo";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";

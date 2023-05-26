@@ -1,22 +1,18 @@
-/*
-This is an example snippet - you should consider tailoring it
-to your service.
+const HASURA_ADMIN_URL = "https://movie-time-2023.hasura.app/v1/graphql";
 
-Note: we only handle the first operation here
-*/
+const headers = {
+  "Content-Type": "application/json",
+  "x-hasura-admin-secret": process.env.NEXT_PUBLIC_HASURA_ADMIN_SECRET || "",
+};
 
 function fetchGraphQL(
   operationsDoc: string,
   operationName: string,
   variables: Record<string, any>
 ) {
-  return fetch("https://movie-time-2023.hasura.app/v1/graphql", {
+  return fetch(HASURA_ADMIN_URL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-hasura-admin-secret":
-        "fikGpmD96UiaYEAZKeIDRRB163efpTyLduvE3im62T5C7ojvgiOgkgdupahcAGJu",
-    },
+    headers,
     body: JSON.stringify({
       query: operationsDoc,
       variables,

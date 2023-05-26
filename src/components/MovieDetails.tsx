@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./layout/Navbar";
 import { baseUrl } from "@/utils/constant";
 import GradientBackground from "@/components/GradientBackground";
 import { IoIosInformationCircle } from "react-icons/io";
