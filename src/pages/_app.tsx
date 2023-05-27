@@ -1,8 +1,7 @@
-import '@/styles/globals.css';
-import Login from '@/components/Login';
-import { EStatus } from '@/utils/constant';
-import { SessionProvider, useSession } from 'next-auth/react';
-import router from 'next/router';
+import "@/styles/globals.css";
+import { EStatus } from "@/utils/constant";
+import { SessionProvider, useSession } from "next-auth/react";
+import router from "next/router";
 
 export default function App({
   Component,
@@ -26,13 +25,13 @@ function Auth({ children }: any) {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      router.replace('/');
+      router.replace("/");
     },
   });
 
   if (status === EStatus.loading) {
     return (
-      <div className='w-screen h-screen flex justify-center items-center text-3xl'>
+      <div className="w-screen h-screen flex justify-center items-center text-3xl">
         <h1>Loading...</h1>
       </div>
     );
