@@ -67,4 +67,8 @@
   .bannerButton {
     @apply flex items-center gap-x-2 rounded px-5 py-1.5 text-sm font-semibold transition hover:opacity-75 md:py-2.5 md:px-8 md:text-xl;
   }
+
+  .bg-glass {
+    @apply backdrop-blur-sm rounded-2xl bg-white/20 border-[1px] shadow-md border-white/30;
+  }
 }

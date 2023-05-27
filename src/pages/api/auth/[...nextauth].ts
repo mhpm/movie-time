@@ -1,18 +1,23 @@
-import { logger } from '@/utils/logger';
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+import { logger } from "@/utils/logger";
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 
 export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID || '',
-      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET || '',
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID || "",
+      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET || "",
     }),
+    // GithubProvider({
+    //   clientId: process.env.TWITTER_ID || "",
+    //   clientSecret: process.env.TWITTER_SECRET || "",
+    // }),
   ],
   events: {
     async signIn(message: any) {
-      logger.info('signIn');
+      logger.info("signIn");
 
       /* on successful sign in */
     },
