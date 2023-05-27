@@ -92,7 +92,7 @@ const Modal = ({ movie, handleClose }: any) => {
 const Container = ({ children }: Props) => {
   return (
     <div className="fixed z-50 w-screen h-screen top-0 left-0 flex justify-center items-center bg-black/50 backdrop-blur-sm">
-      <div className="no-scrollbar sm:w-2/3 lg:w-1/2 w-[90%] bg-[#141414] overflow-auto sm:h-fit h-[90vh] relative pb-10 rounded-xl">
+      <div className="no-scrollbar sm:w-2/3 lg:w-1/2 w-[90%] bg-[#141414] overflow-auto sm:h-fit max-h-[90vh] relative pb-10 rounded-xl">
         {children}
       </div>
     </div>
@@ -100,7 +100,12 @@ const Container = ({ children }: Props) => {
 };
 
 const Title = ({ children }: Props) => {
-  return <h1 className="text-3xl font-bold mb-2 pl-10"> {children}</h1>;
+  return (
+    <h1 className="sm:text-3xl text-xl font-bold mb-2 px-10 mt-10">
+      {" "}
+      {children}
+    </h1>
+  );
 };
 
 const ButtonPlayer = ({
