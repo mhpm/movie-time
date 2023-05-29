@@ -1,14 +1,13 @@
-"use client";
-
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import Modal from "@/components/layout/Modal";
+
 import Thumbnail from "@/components/Thumbnail";
+import { useAppDispatch } from "@/redux/hooks";
+import { setVideo } from "@/redux/features/movieSlice";
 
 const Row = ({ title, movies }: any) => {
   const rowRef: any = useRef(null);
-  const [showModal, setShowModal] = useState(false);
-  const [activeMovie, setActiveMovie] = useState(null);
+  const dispatch = useAppDispatch();
 
   const handleClick = (direction: any) => {
     if (rowRef.current) {
@@ -23,16 +22,8 @@ const Row = ({ title, movies }: any) => {
     }
   };
 
-  const showDetails = (movie: any) => {
-    setActiveMovie(movie);
-    setShowModal(true);
-  };
-
   return (
     <div className="space-y-0.5 md:space-y-2">
-      {showModal && (
-        <Modal movie={activeMovie} handleClose={() => setShowModal(false)} />
-      )}
       <h2 className="w-56 mt-6 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
         {title}
       </h2>
@@ -52,7 +43,7 @@ const Row = ({ title, movies }: any) => {
               <Thumbnail
                 key={movie.id}
                 movie={movie}
-                handleClick={() => showDetails(movie)}
+                handleClick={() => dispatch(setVideo(movie))}
               />
             ))}
         </div>

@@ -1,3 +1,4 @@
+import { Providers } from "@/redux/providers";
 import "@/styles/globals.css";
 import { EStatus } from "@/utils/constant";
 import { SessionProvider, useSession } from "next-auth/react";
@@ -9,13 +10,15 @@ export default function App({
 }: any) {
   return (
     <SessionProvider session={session}>
-      {Component.auth ? (
-        <Auth>
+      <Providers>
+        {Component.auth ? (
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        ) : (
           <Component {...pageProps} />
-        </Auth>
-      ) : (
-        <Component {...pageProps} />
-      )}
+        )}
+      </Providers>
     </SessionProvider>
   );
 }

@@ -3,6 +3,9 @@ import { getSession } from "next-auth/react";
 import requests from "@/utils/requests";
 import Hero from "@/components/layout/Hero";
 import Row from "@/components/layout/Row";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import Modal from "@/components/layout/Modal";
+import { clearVideo } from "@/redux/features/movieSlice";
 
 export default function Dashboard({
   moviePosters = [],
@@ -14,6 +17,9 @@ export default function Dashboard({
   romanceMovies = [],
   documentaries = [],
 }: any) {
+  const videoSelected = useAppSelector((state) => state.videoReducer.video);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Head>
@@ -26,6 +32,12 @@ export default function Dashboard({
       <main className="relative">
         <Hero moviePosters={moviePosters} />
 
+        {videoSelected && (
+          <Modal
+            movie={videoSelected}
+            handleClose={() => dispatch(clearVideo())}
+          />
+        )}
         <section className="pb-32 ">
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
