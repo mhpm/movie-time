@@ -14,17 +14,17 @@ const Navbar = () => {
   return (
     <nav
       className={[
-        positionY > 500 ? "bg-primary" : "",
+        positionY > 100 ? "bg-primary" : "",
         "transition duration-300 ease-out",
       ].join(" ")}
     >
-      <div className="container flex justify-between">
+      <div className="flex justify-between w-screen">
         <div className="flex items-center space-x-2 md:space-x-10">
-          <Link href="/">
+          <Link href="/dashboard">
             <Logo style="h-auto w-[100px]" />
           </Link>
 
-          <ul className="hidden space-x-4 md:flex">
+          {/* <ul className="hidden space-x-4 md:flex">
             <li className="headerLink cursor-pointer font-semibold text-white hover:text-white">
               Home
             </li>
@@ -33,13 +33,13 @@ const Navbar = () => {
             <li className="headerLink">Movies</li>
             <li className="headerLink">New & Popular</li>
             <li className="headerLink">My List</li>
-          </ul>
+          </ul> */}
         </div>
 
         <div className="flex items-center space-x-4 text-sm font-light">
-          <BiSearch className="sm hidden h-6 w-6 sm:inline" />
-          <p className="hidden lg:inline">{session?.user?.name}</p>
-          <BsBellFill className="h-6 w-6" />
+          {/* <BiSearch className="sm hidden h-6 w-6 sm:inline" /> */}
+          <p className="hidden sm:inline">{session?.user?.name}</p>
+          {/* <BsBellFill className="h-6 w-6" /> */}
 
           <Image
             src="/dp.png"

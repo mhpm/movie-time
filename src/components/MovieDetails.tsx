@@ -16,7 +16,7 @@ const MovieDetails = ({ movie, trailerURL }: any) => {
   return (
     <ParallaxProvider>
       <Navbar />
-      <div className="container">
+      <div className="">
         <div className="flex flex-col space-y-2 py-16 md:space-y-4 h-screen justify-center lg:pb-12 px-16">
           <GradientBackground
             url={`${baseUrl}${movie?.backdrop_path || movie?.poster_path}`}
