@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getProviders, signIn } from "next-auth/react";
-import { fetchMyQuery } from "@/lib/hasura";
 import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import { authOptions } from "./api/auth/[...nextauth]";
@@ -15,19 +14,6 @@ const Login = ({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetchMyQuery()
-      .then(({ data, errors }) => {
-        if (errors) {
-          console.error(errors);
-        }
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   const onLogin = async (providerId: string) => {
     setLoading(true);
