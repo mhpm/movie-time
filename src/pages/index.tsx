@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getProviders, signIn } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
@@ -7,16 +6,16 @@ import { version } from "../../package.json";
 
 import Logo from "../components/layout/Logo";
 import Head from "next/head";
-import Spinner from "@/components/Spinner";
 import LogoProvider from "@/components/LogoProvider";
+import useSpinner from "@/hooks/useSpinner";
 
 const Login = ({
   providers,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const [loading, setLoading] = useState(false);
+  const { loading, toggleSpinner, Spinner } = useSpinner();
 
   const onLogin = async (providerId: string) => {
-    setLoading(true);
+    toggleSpinner();
     await signIn(providerId, { redirect: false, callbackUrl: "/dashboard" });
   };
 
@@ -37,7 +36,6 @@ const Login = ({
 
         <div className="text-center p-10 sm:w-[400px] w-full  space-y-6 flex flex-col justify-center items-center bg-glass">
           <h2 className="text-3xl font-medium">Sign In</h2>
-
           {loading ? (
             <Spinner />
           ) : (

@@ -1,3 +1,4 @@
+import Toast from "@/components/layout/Toast";
 import { Providers } from "@/redux/providers";
 import "@/styles/globals.css";
 import { EStatus } from "@/utils/constant";
@@ -18,6 +19,7 @@ export default function App({
         ) : (
           <Component {...pageProps} />
         )}
+        <Toast />
       </Providers>
     </SessionProvider>
   );
